@@ -5,7 +5,7 @@ const htmlRoutes = require('./Develop/routes/htmlRoutes');
 const PORT = process.env.PORT || 3002;
 
 // middleware to access styling and frontend javascript
-app.use(express.static('./develop/public'))
+app.use(express.static('./Develop/public'))
 
 app.use(express.urlencoded({ extended: true }));
 
