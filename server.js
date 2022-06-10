@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const apiRoutes = require('./Develop/routes/apiRoutes')
 const htmlRoutes = require('./Develop/routes/htmlRoutes');
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 // middleware to access styling and frontend javascript
 app.use(express.static('./develop/public'))

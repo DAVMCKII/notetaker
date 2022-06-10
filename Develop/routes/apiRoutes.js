@@ -9,7 +9,7 @@ const writeFileAsync =util.promisify(fs.writeFile);
 
 router.get('/api/notes', function(req, res){
     readFileAsync('./develop/db/db.json', 'utf-8').then(function(data){
-        notes = [].concat(JSON.psrse(data))
+        notes = [].concat(JSON.parse(data))
         res.json(notes);
     })
 })
@@ -17,15 +17,16 @@ router.get('/api/notes', function(req, res){
 // POST request
 
 router.post('/api/notes', function(req, res){
+    const note = req.body
     readFileAsync('./develop/db/db.json', 'utf-8').then(function(data){
-        notes = [].concat(JSON.psrse(data))
+        notes = [].concat(JSON.parse(data))
         note.id = notes.length + 1
         notes.push(note);
-        return notes
+        return note
 
     }).then(function(notes){
         writeFileAsync('./develop/db/db.json',JSON.stringify(notes))
-        res.json(notes)
+        res.json(note)
     })
 })
 
@@ -34,7 +35,7 @@ router.post('/api/notes', function(req, res){
 router.delete('/api/notes/:id', function(req, res){
     const idToDelete = parseInt(req.params.id);
     readFileAsync('./develop/db/db.json', 'utf-8').then(function(data){
-        notes = [].concat(JSON.psrse(data));
+        notes = [].concat(JSON.parse(data));
         const newNotesData = []
         for (let i = 0; i<notes.length; i++) {
             if(idToDelete !== notes [i].id) {
